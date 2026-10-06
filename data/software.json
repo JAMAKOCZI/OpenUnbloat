@@ -1,0 +1,220 @@
+﻿{
+  "Version": "2.0",
+  "Categories": [
+    { "id": "Browsers", "name": "Przeglądarki Internetowe", "icon": "🌐" },
+    { "id": "Utilities", "name": "Narzędzia i Archiwizatory", "icon": "🛠️" },
+    { "id": "Multimedia", "name": "Multimedia i Grafika", "icon": "🎬" },
+    { "id": "Development", "name": "Programowanie i Narzędzia", "icon": "💻" },
+    { "id": "DocumentsAndCommunication", "name": "Dokumenty i Komunikacja", "icon": "📄" }
+  ],
+  "Packages": [
+    {
+      "id": "7zip.7zip",
+      "name": "7-Zip",
+      "category": "Utilities",
+      "description": "Najszybszy i najpopularniejszy darmowy archiwizator plików (7z, zip, rar, tar).",
+      "recommended": true,
+      "detectPatterns": ["*7-Zip*"]
+    },
+    {
+      "id": "Notepad++.Notepad++",
+      "name": "Notepad++",
+      "category": "Utilities",
+      "description": "Zaawansowany, lekki edytor tekstu i kodu z kolorowaniem składni.",
+      "recommended": true,
+      "detectPatterns": ["*Notepad++*"]
+    },
+    {
+      "id": "voidtools.Everything",
+      "name": "Everything (Voidtools)",
+      "category": "Utilities",
+      "description": "Błyskawiczna wyszukiwarka plików na całym dysku (znajduje pliki natychmiast).",
+      "recommended": true,
+      "detectPatterns": ["*Everything*"]
+    },
+    {
+      "id": "Microsoft.PowerToys",
+      "name": "Microsoft PowerToys",
+      "category": "Utilities",
+      "description": "Zestaw oficjalnych narzędzi: podgląd okien FancyZones, szybki launcher (Alt+Space), OCR.",
+      "recommended": false,
+      "detectPatterns": ["*PowerToys*"]
+    },
+    {
+      "id": "ShareX.ShareX",
+      "name": "ShareX",
+      "category": "Utilities",
+      "description": "Potężne, darmowe narzędzie do robienia zrzutów ekranu, nagrywania GIF i wideo.",
+      "recommended": false,
+      "detectPatterns": ["*ShareX*"]
+    },
+    {
+      "id": "BleachBit.BleachBit",
+      "name": "BleachBit",
+      "category": "Utilities",
+      "description": "Otwartoźródłowy program do głębokiego czyszczenia śmieci i ochrony prywatności.",
+      "recommended": false,
+      "detectPatterns": ["*BleachBit*"]
+    },
+    {
+      "id": "GeekUninstaller.GeekUninstaller",
+      "name": "Geek Uninstaller",
+      "category": "Utilities",
+      "description": "Błyskawiczny, lekki deinstalator czyszczący resztki w rejestrze po programach.",
+      "recommended": true,
+      "detectPatterns": ["*Geek Uninstaller*", "*GeekUninstaller*"]
+    },
+    {
+      "id": "Rufus.Rufus",
+      "name": "Rufus",
+      "category": "Utilities",
+      "description": "Najlepsze narzędzie do tworzenia bootowalnych pendrive'ów z instalatorem Windows/Linux.",
+      "recommended": false,
+      "detectPatterns": ["*Rufus*"]
+    },
+    {
+      "id": "CrystalDewWorld.CrystalDiskInfo",
+      "name": "CrystalDiskInfo",
+      "category": "Utilities",
+      "description": "Monitor stanu zdrowia i temperatury dysków SSD i HDD (dane S.M.A.R.T.).",
+      "recommended": false,
+      "detectPatterns": ["*CrystalDiskInfo*"]
+    },
+    {
+      "id": "Mozilla.Firefox",
+      "name": "Mozilla Firefox",
+      "category": "Browsers",
+      "description": "Niezależna przeglądarka internetowa nastawiona na prywatność i blokowanie śledzenia.",
+      "recommended": true,
+      "detectPatterns": ["*Mozilla Firefox*", "*Firefox*"]
+    },
+    {
+      "id": "Brave.Brave",
+      "name": "Brave Browser",
+      "category": "Browsers",
+      "description": "Szybka przeglądarka na silniku Chromium z wbudowanym blokerem reklam i skryptów.",
+      "recommended": true,
+      "detectPatterns": ["*Brave*"]
+    },
+    {
+      "id": "LibreWolf.LibreWolf",
+      "name": "LibreWolf Browser",
+      "category": "Browsers",
+      "description": "Wersja Firefoxa stworzona pod maksymalną prywatność, bez żadnej telemetrii.",
+      "recommended": false,
+      "detectPatterns": ["*LibreWolf*"]
+    },
+    {
+      "id": "Google.Chrome",
+      "name": "Google Chrome",
+      "category": "Browsers",
+      "description": "Standardowa przeglądarka firmy Google.",
+      "recommended": false,
+      "detectPatterns": ["*Google Chrome*", "*Chrome*"]
+    },
+    {
+      "id": "VideoLAN.VLC",
+      "name": "VLC Media Player",
+      "category": "Multimedia",
+      "description": "Odtwarzacz audio i wideo z wbudowanymi kodekami do niemal każdego formatu.",
+      "recommended": true,
+      "detectPatterns": ["*VLC media player*", "*VideoLAN*", "*VLC*"]
+    },
+    {
+      "id": "OBSProject.OBSStudio",
+      "name": "OBS Studio",
+      "category": "Multimedia",
+      "description": "Profesjonalny program do nagrywania pulpitu i transmisji na żywo (streaming).",
+      "recommended": false,
+      "detectPatterns": ["*OBS Studio*", "*OBS*"]
+    },
+    {
+      "id": "dotPDNLLC.paintdotnet",
+      "name": "Paint.NET",
+      "category": "Multimedia",
+      "description": "Prosty w obsłudze, a zarazem zaawansowany edytor graficzny z warstwami.",
+      "recommended": false,
+      "detectPatterns": ["*Paint.NET*", "*paint.net*"]
+    },
+    {
+      "id": "Audacity.Audacity",
+      "name": "Audacity",
+      "category": "Multimedia",
+      "description": "Popularny edytor i rejestrator dźwięku wielościeżkowego.",
+      "recommended": false,
+      "detectPatterns": ["*Audacity*"]
+    },
+    {
+      "id": "HandBrake.HandBrake",
+      "name": "HandBrake",
+      "category": "Multimedia",
+      "description": "Narzędzie typu open-source do bezstratnej konwersji i kompresji plików wideo.",
+      "recommended": false,
+      "detectPatterns": ["*HandBrake*"]
+    },
+    {
+      "id": "SumatraPDF.SumatraPDF",
+      "name": "SumatraPDF",
+      "category": "DocumentsAndCommunication",
+      "description": "Niezwykle szybki, minimalistyczny czytnik dokumentów PDF, ePub i Mobi.",
+      "recommended": true,
+      "detectPatterns": ["*SumatraPDF*", "*Sumatra*"]
+    },
+    {
+      "id": "TheDocumentFoundation.LibreOffice",
+      "name": "LibreOffice",
+      "category": "DocumentsAndCommunication",
+      "description": "Kompletny, darmowy pakiet biurowy (odpowiednik Worda, Excela i PowerPointa).",
+      "recommended": false,
+      "detectPatterns": ["*LibreOffice*"]
+    },
+    {
+      "id": "Discord.Discord",
+      "name": "Discord",
+      "category": "DocumentsAndCommunication",
+      "description": "Popularny komunikator głosowy i tekstowy dla graczy i społeczności.",
+      "recommended": false,
+      "detectPatterns": ["*Discord*"]
+    },
+    {
+      "id": "Telegram.TelegramDesktop",
+      "name": "Telegram Desktop",
+      "category": "DocumentsAndCommunication",
+      "description": "Szybki, bezpieczny komunikator z synchronizacją w chmurze.",
+      "recommended": false,
+      "detectPatterns": ["*Telegram Desktop*", "*Telegram*"]
+    },
+    {
+      "id": "Mozilla.Thunderbird",
+      "name": "Mozilla Thunderbird",
+      "category": "DocumentsAndCommunication",
+      "description": "Prywatny, niezależny klient poczty e-mail, kalendarza i zadań.",
+      "recommended": false,
+      "detectPatterns": ["*Thunderbird*"]
+    },
+    {
+      "id": "Microsoft.VisualStudioCode",
+      "name": "Visual Studio Code",
+      "category": "Development",
+      "description": "Najpopularniejszy na świecie edytor kodu ze wsparciem dla tysięcy rozszerzeń.",
+      "recommended": false,
+      "detectPatterns": ["*Visual Studio Code*", "*VS Code*"]
+    },
+    {
+      "id": "Git.Git",
+      "name": "Git for Windows",
+      "category": "Development",
+      "description": "Rozproszony system kontroli wersji dla programistów.",
+      "recommended": false,
+      "detectPatterns": ["*Git*", "*Git for Windows*"]
+    },
+    {
+      "id": "Python.Python.3.12",
+      "name": "Python 3.12",
+      "category": "Development",
+      "description": "Oficjalny interpreter języka Python dla systemu Windows.",
+      "recommended": false,
+      "detectPatterns": ["*Python 3.12*", "*Python*"]
+    }
+  ]
+}

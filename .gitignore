@@ -1,0 +1,16 @@
+# Windows & PowerShell
+*.log
+*.tmp
+*.bak
+*~
+
+
+# Visual Studio / VS Code / IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# .NET Build outputs (jeśli tworzone ręcznie)
+bin/
+obj/

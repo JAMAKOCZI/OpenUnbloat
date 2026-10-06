@@ -1,0 +1,1061 @@
+﻿{
+  "Version": "2.0",
+  "Categories": [
+    { "id": "AI", "name": "Sztuczna Inteligencja (Copilot & Recall)", "icon": "🤖" },
+    { "id": "Privacy", "name": "Prywatność i Telemetria", "icon": "🛡️" },
+    { "id": "StartAndTaskbar", "name": "Menu Start i Pasek Zadań", "icon": "🪟" },
+    { "id": "UIAndExplorer", "name": "Eksplorator i Interfejs", "icon": "📁" },
+    { "id": "WindowsFeatures", "name": "Funkcje Opcjonalne i Składniki Systemu", "icon": "🧩" },
+    { "id": "ServicesAndTasks", "name": "Usługi i Harmonogram Zadań", "icon": "⚙️" },
+    { "id": "Edge", "name": "Przeglądarka Microsoft Edge", "icon": "🌐" },
+    { "id": "GamingAndPerformance", "name": "Wydajność i Gry (Gaming)", "icon": "⚡" },
+    { "id": "OneDriveAndCloud", "name": "OneDrive i Chmura", "icon": "☁️" },
+    { "id": "WindowsUpdates", "name": "Aktualizacje Windows Update", "icon": "🔄" }
+  ],
+  "Tweaks": [
+    {
+      "id": "disable_copilot",
+      "name": "Wyłącz Microsoft Copilot i przycisk na pasku",
+      "category": "AI",
+      "description": "Całkowicie wyłącza asystenta Copilot w systemie oraz usuwa jego ikonę z paska zadań.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+        "name": "TurnOffWindowsCopilot",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot", "name": "TurnOffWindowsCopilot", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot", "name": "TurnOffWindowsCopilot", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowCopilotButton", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot", "name": "TurnOffWindowsCopilot" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot", "name": "TurnOffWindowsCopilot" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowCopilotButton", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_ai_recall",
+      "name": "Wyłącz Windows Recall i analizę danych AI",
+      "category": "AI",
+      "description": "Blokuje funkcję Windows Recall (robienie cyklicznych zrzutów ekranu przez AI) oraz analizę danych.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "name": "DisableAIDataAnalysis",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "AllowRecallEnablement", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "TurnOffSavingSnapshots", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "AllowRecallEnablement" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "TurnOffSavingSnapshots" },
+        { "type": "registry_delete", "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\WindowsAI", "name": "DisableAIDataAnalysis" }
+      ]
+    },
+    {
+      "id": "disable_telemetry_policies",
+      "name": "Wyłącz telemetrię i zbieranie diagnostyki",
+      "category": "Privacy",
+      "description": "Ogranicza poziom diagnostyki do minimum (Security Level) i wyłącza powiadomienia opinii.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowTelemetry",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "AllowTelemetry", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "DoNotShowFeedbackNotifications", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Privacy", "name": "TailoredExperiencesWithDiagnosticDataEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "AllowTelemetry" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection", "name": "DoNotShowFeedbackNotifications" },
+        { "type": "registry_delete", "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Privacy", "name": "TailoredExperiencesWithDiagnosticDataEnabled" }
+      ]
+    },
+    {
+      "id": "disable_advertising_id",
+      "name": "Wyłącz identyfikator reklam (Advertising ID)",
+      "category": "Privacy",
+      "description": "Blokuje śledzenie profilu reklamowego użytkownika w aplikacjach ze Sklepu.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "name": "Enabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo", "name": "Enabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo", "name": "Enabled", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_activity_history",
+      "name": "Wyłącz historię aktywności (Timeline)",
+      "category": "Privacy",
+      "description": "Wyłącza śledzenie otwieranych aplikacji i przesyłanie historii działań do chmury.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "name": "EnableActivityFeed",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "EnableActivityFeed", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "PublishUserActivities", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "UploadUserActivities", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "EnableActivityFeed" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "PublishUserActivities" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System", "name": "UploadUserActivities" }
+      ]
+    },
+    {
+      "id": "disable_consumer_features",
+      "name": "Zablokuj automatyczną instalację aplikacji sponsorowanych",
+      "category": "Privacy",
+      "description": "Zapobiega pobieraniu przez Windows aplikacji takich jak TikTok czy gry przy nowych kontach i aktualizacjach.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableWindowsConsumerFeatures",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent", "name": "DisableWindowsConsumerFeatures", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent", "name": "DisableWindowsConsumerFeatures" }
+      ]
+    },
+    {
+      "id": "disable_settings_ads",
+      "name": "Wyłącz reklamy i baner Microsoft 365 w Ustawieniach",
+      "category": "Privacy",
+      "description": "Ukrywa promocje subskrypcji Microsoft 365, OneDrive i konta na stronie głównej Ustawień.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "name": "DisableConsumerAccountStateContent",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent", "name": "DisableConsumerAccountStateContent", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent", "name": "DisableConsumerAccountStateContent" }
+      ]
+    },
+    {
+      "id": "disable_lockscreen_tips",
+      "name": "Wyłącz porady i ciekawostki na ekranie blokady",
+      "category": "Privacy",
+      "description": "Usuwa reklamy i nakładki tekstowe na ekranie blokady (Windows Spotlight).",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "name": "RotatingLockScreenOverlayEnabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "RotatingLockScreenOverlayEnabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338387Enabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "RotatingLockScreenOverlayEnabled", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager", "name": "SubscribedContent-338387Enabled", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_inking_typing_telemetry",
+      "name": "Wyłącz telemetrię klawiatury i pisma odręcznego (Keylogger)",
+      "category": "Privacy",
+      "description": "Blokuje wysyłanie próbek tekstu, wpisywanych znaków i pisma do chmury Microsoftu.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\InputPersonalization",
+        "name": "RestrictImplicitInkCollection",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\InputPersonalization", "name": "RestrictImplicitInkCollection", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\InputPersonalization", "name": "RestrictImplicitTextCollection", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Personalization\\Settings", "name": "AcceptedPrivacyPolicy", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\InputPersonalization", "name": "RestrictImplicitInkCollection", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\InputPersonalization", "name": "RestrictImplicitTextCollection", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Personalization\\Settings", "name": "AcceptedPrivacyPolicy", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_error_reporting",
+      "name": "Wyłącz raportowanie awarii Windows Error Reporting (WerSvc)",
+      "category": "Privacy",
+      "description": "Zapobiega wysyłaniu zrzutów pamięci RAM i raportów o błędach programów do Microsoftu.",
+      "risk": "Safe",
+      "presets": ["Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\Windows Error Reporting",
+        "name": "Disabled",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\Windows Error Reporting", "name": "Disabled", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting", "name": "Disabled", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\Windows Error Reporting", "name": "Disabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting", "name": "Disabled", "value": 0, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_location_services",
+      "name": "Wyłącz usługi lokalizacji i czujniki geolokalizacyjne",
+      "category": "Privacy",
+      "description": "Blokuje dostęp systemu Windows i aplikacji do położenia fizycznego komputera.",
+      "risk": "Safe",
+      "presets": ["Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "name": "DisableLocation",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors", "name": "DisableLocation", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors", "name": "DisableLocation" }
+      ]
+    },
+    {
+      "id": "disable_find_my_device",
+      "name": "Wyłącz funkcję śledzenia 'Znajdź moje urządzenie'",
+      "category": "Privacy",
+      "description": "Wyłącza ciągłe wysyłanie współrzędnych urządzenia na serwery Microsoftu.",
+      "risk": "Safe",
+      "presets": ["Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+        "name": "AllowFindMyDevice",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice", "name": "AllowFindMyDevice", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice", "name": "AllowFindMyDevice" }
+      ]
+    },
+    {
+      "id": "disable_bing_start",
+      "name": "Wyłącz wyszukiwarkę Bing w Menu Start",
+      "category": "StartAndTaskbar",
+      "description": "Wyszukiwanie w menu Start będzie przeszukiwać tylko lokalne pliki i programy, bez łączenia z Bingiem.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "name": "DisableSearchBoxSuggestions",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer", "name": "DisableSearchBoxSuggestions", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "BingSearchEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKCU:\\Software\\Policies\\Microsoft\\Windows\\Explorer", "name": "DisableSearchBoxSuggestions" },
+        { "type": "registry_delete", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search", "name": "BingSearchEnabled" }
+      ]
+    },
+    {
+      "id": "disable_search_highlights",
+      "name": "Wyłącz Search Highlights (rysunki i wiadomości w szukajce)",
+      "category": "StartAndTaskbar",
+      "description": "Usuwa grafiki okolicznościowe i trendy wyszukiwania z pola wyszukiwania Windows.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings",
+        "name": "IsDynamicSearchBoxEnabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings", "name": "IsDynamicSearchBoxEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\SearchSettings", "name": "IsDynamicSearchBoxEnabled", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_taskbar_widgets",
+      "name": "Ukryj widżety (pogodę i wiadomości MSN) na pasku zadań",
+      "category": "StartAndTaskbar",
+      "description": "Ukrywa ikonę widżetów na pasku zadań, oszczędzając zasoby procesora i pamięci.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "TaskbarDa",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarDa", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarDa", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_chat_taskbar",
+      "name": "Ukryj ikonę Czatu (Microsoft Teams) na pasku zadań",
+      "category": "StartAndTaskbar",
+      "description": "Ukrywa domyślną ikonę czatu konsumenckiego Teams.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "TaskbarMn",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarMn", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "TaskbarMn", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "hide_start_recommended",
+      "name": "Ukryj sekcję 'Proponowane' (Recommended) w Menu Start",
+      "category": "StartAndTaskbar",
+      "description": "Oczyszcza Menu Start z historii ostatnio otwieranych plików i polecanych aplikacji.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "Start_TrackDocs",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Start_TrackDocs", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer", "name": "HideRecommendedSection", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Start_TrackDocs", "value": 1, "propertyType": "DWord" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer", "name": "HideRecommendedSection" }
+      ]
+    },
+    {
+      "id": "disable_phone_link_start",
+      "name": "Ukryj panel Łącze z telefonem w Menu Start",
+      "category": "StartAndTaskbar",
+      "description": "Ukrywa boczny panel telefonu w menu Start Windows 11.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Start\\Companions\\Microsoft.YourPhone_8wekyb3d8bbwe",
+        "name": "IsEnabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Start\\Companions\\Microsoft.YourPhone_8wekyb3d8bbwe", "name": "IsEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Start\\Companions\\Microsoft.YourPhone_8wekyb3d8bbwe", "name": "IsEnabled", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "enable_taskbar_end_task",
+      "name": "Włącz opcję 'Zakończ zadanie' w menu paska zadań",
+      "category": "StartAndTaskbar",
+      "description": "Pozwala zabić zawieszony program prawym przyciskiem myszy na ikonie na pasku zadań.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings",
+        "name": "TaskbarEndTask",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings", "name": "TaskbarEndTask", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings", "name": "TaskbarEndTask", "value": 0, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "explorer_launch_thispc",
+      "name": "Otwieraj Eksplorator na 'Ten komputer' zamiast 'Strona główna'",
+      "category": "UIAndExplorer",
+      "description": "Przyspiesza start Eksploratora plików i przechodzi od razu do dysków zamiast chmury i ostatnich plików.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "LaunchTo",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "LaunchTo", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "LaunchTo", "value": 2, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "show_file_extensions",
+      "name": "Pokazuj rozszerzenia znanych typów plików",
+      "category": "UIAndExplorer",
+      "description": "Wyświetla rozszerzenia (.exe, .txt, .pdf) w Eksploratorze (zwiększa bezpieczeństwo przed fałszywymi plikami).",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "HideFileExt",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "HideFileExt", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "HideFileExt", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "show_hidden_files",
+      "name": "Pokazuj ukryte pliki i foldery",
+      "category": "UIAndExplorer",
+      "description": "Włącza widoczność ukrytych folderów i plików w Eksploratorze Windows.",
+      "risk": "Safe",
+      "presets": [],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "Hidden",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Hidden", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "Hidden", "value": 2, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_explorer_ads",
+      "name": "Wyłącz powiadomienia sponsorowane i reklamy w Eksploratorze",
+      "category": "UIAndExplorer",
+      "description": "Blokuje powiadomienia o usługach OneDrive i promocjach w oknie Eksploratora plików.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "ShowSyncProviderNotifications",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowSyncProviderNotifications", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced", "name": "ShowSyncProviderNotifications", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "classic_context_menu",
+      "name": "Klasyczne menu kontekstowe (styl Windows 10)",
+      "category": "UIAndExplorer",
+      "description": "Przywraca pełne menu prawego przycisku myszy bez konieczności klikania 'Pokaż więcej opcji'.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry_path_exists",
+        "path": "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32"
+      },
+      "apply": [
+        { "type": "registry_default", "path": "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32", "value": "" }
+      ],
+      "revert": [
+        { "type": "registry_key_delete", "path": "HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" }
+      ]
+    },
+    {
+      "id": "disable_smbv1",
+      "name": "Wyłącz przestarzały i podatny protokół SMBv1",
+      "category": "WindowsFeatures",
+      "description": "Wyłącza archaiczny protokół SMB 1.0 wykorzystywany m.in. przez ransomware WannaCry.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "optional_feature",
+        "name": "SMB1Protocol",
+        "expectedState": "Disabled"
+      },
+      "apply": [
+        { "type": "optional_feature", "name": "SMB1Protocol", "state": "Disabled" }
+      ],
+      "revert": [
+        { "type": "optional_feature", "name": "SMB1Protocol", "state": "Enabled" }
+      ]
+    },
+    {
+      "id": "disable_legacy_media_player",
+      "name": "Wyłącz stary Windows Media Player (wersja klasyczna)",
+      "category": "WindowsFeatures",
+      "description": "Usuwa przestarzały składnik Windows Media Player z systemu.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "optional_feature",
+        "name": "WindowsMediaPlayer",
+        "expectedState": "Disabled"
+      },
+      "apply": [
+        { "type": "optional_feature", "name": "WindowsMediaPlayer", "state": "Disabled" }
+      ],
+      "revert": [
+        { "type": "optional_feature", "name": "WindowsMediaPlayer", "state": "Enabled" }
+      ]
+    },
+    {
+      "id": "disable_steps_recorder",
+      "name": "Wyłącz Rejestrator Kroków (Steps Recorder)",
+      "category": "WindowsFeatures",
+      "description": "Usuwa wycofany przez firmę Microsoft program do rejestrowania działań PSR.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "capability",
+        "name": "App.StepsRecorder",
+        "expectedState": "NotPresent"
+      },
+      "apply": [
+        { "type": "capability", "name": "App.StepsRecorder", "state": "NotPresent" }
+      ],
+      "revert": [
+        { "type": "capability", "name": "App.StepsRecorder", "state": "Installed" }
+      ]
+    },
+    {
+      "id": "disable_math_recognizer",
+      "name": "Wyłącz Narzędzie Rozpoznawania Matematyki",
+      "category": "WindowsFeatures",
+      "description": "Usuwa składnik rozpoznawania pisma odręcznego dla wzorów matematycznych.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "capability",
+        "name": "MathRecognizer",
+        "expectedState": "NotPresent"
+      },
+      "apply": [
+        { "type": "capability", "name": "MathRecognizer", "state": "NotPresent" }
+      ],
+      "revert": [
+        { "type": "capability", "name": "MathRecognizer", "state": "Installed" }
+      ]
+    },
+    {
+      "id": "disable_ie_mode",
+      "name": "Wyłącz składnik Internet Explorer Mode",
+      "category": "WindowsFeatures",
+      "description": "Usuwa przestarzałe biblioteki silnika Internet Explorer z systemu Windows 11.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "capability",
+        "name": "Browser.InternetExplorer",
+        "expectedState": "NotPresent"
+      },
+      "apply": [
+        { "type": "capability", "name": "Browser.InternetExplorer", "state": "NotPresent" }
+      ],
+      "revert": [
+        { "type": "capability", "name": "Browser.InternetExplorer", "state": "Installed" }
+      ]
+    },
+    {
+      "id": "enable_wsl",
+      "name": "Włącz Podsystem Windows dla systemu Linux (WSL)",
+      "category": "WindowsFeatures",
+      "description": "Włącza funkcję wirtualizacji jądra wymaganą do uruchamiania Linuksa w Windows.",
+      "risk": "Safe",
+      "presets": [],
+      "check": {
+        "type": "optional_feature",
+        "name": "Microsoft-Windows-Subsystem-Linux",
+        "expectedState": "Enabled"
+      },
+      "apply": [
+        { "type": "optional_feature", "name": "Microsoft-Windows-Subsystem-Linux", "state": "Enabled" }
+      ],
+      "revert": [
+        { "type": "optional_feature", "name": "Microsoft-Windows-Subsystem-Linux", "state": "Disabled" }
+      ]
+    },
+    {
+      "id": "enable_windows_sandbox",
+      "name": "Włącz Piaskownicę systemu Windows (Windows Sandbox)",
+      "category": "WindowsFeatures",
+      "description": "Uruchamia odizolowane, bezpieczne środowisko jednorazowe do testowania programów.",
+      "risk": "Safe",
+      "presets": [],
+      "check": {
+        "type": "optional_feature",
+        "name": "Containers-DisposableClientVM",
+        "expectedState": "Enabled"
+      },
+      "apply": [
+        { "type": "optional_feature", "name": "Containers-DisposableClientVM", "state": "Enabled" }
+      ],
+      "revert": [
+        { "type": "optional_feature", "name": "Containers-DisposableClientVM", "state": "Disabled" }
+      ]
+    },
+    {
+      "id": "enable_virtual_machine_platform",
+      "name": "Włącz Platformę Maszyn Wirtualnych (Hyper-V / VMP)",
+      "category": "WindowsFeatures",
+      "description": "Podstawa dla WSL 2, Podsystemu Android oraz maszyn wirtualnych.",
+      "risk": "Safe",
+      "presets": [],
+      "check": {
+        "type": "optional_feature",
+        "name": "VirtualMachinePlatform",
+        "expectedState": "Enabled"
+      },
+      "apply": [
+        { "type": "optional_feature", "name": "VirtualMachinePlatform", "state": "Enabled" }
+      ],
+      "revert": [
+        { "type": "optional_feature", "name": "VirtualMachinePlatform", "state": "Disabled" }
+      ]
+    },
+    {
+      "id": "disable_telemetry_services",
+      "name": "Wyłącz usługi zbierania danych (DiagTrack & dmwappushservice)",
+      "category": "ServicesAndTasks",
+      "description": "Zatrzymuje i wyłącza usługi systemowe odpowiedzialne za telemetrię i zbieranie diagnostyki.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "service",
+        "name": "DiagTrack",
+        "expectedStartup": "Disabled"
+      },
+      "apply": [
+        { "type": "service", "name": "DiagTrack", "startupType": "Disabled", "state": "Stopped" },
+        { "type": "service", "name": "dmwappushservice", "startupType": "Disabled", "state": "Stopped" }
+      ],
+      "revert": [
+        { "type": "service", "name": "DiagTrack", "startupType": "Automatic", "state": "Running" },
+        { "type": "service", "name": "dmwappushservice", "startupType": "Manual", "state": "Running" }
+      ]
+    },
+    {
+      "id": "disable_telemetry_tasks",
+      "name": "Wyłącz zadania telemetrii w Harmonogramie Zadań",
+      "category": "ServicesAndTasks",
+      "description": "Wyłącza zadania Microsoft Compatibility Appraiser, Consolidator i CEIP w harmonogramie Windows.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "scheduled_task",
+        "patterns": ["*Appraiser*", "*Consolidator*", "*UsbCeip*"],
+        "expectedState": "Disabled"
+      },
+      "apply": [
+        { "type": "scheduled_task", "patterns": ["*Appraiser*", "*ProgramDataUpdater*", "*Consolidator*", "*UsbCeip*"], "state": "Disabled" }
+      ],
+      "revert": [
+        { "type": "scheduled_task", "patterns": ["*Appraiser*", "*ProgramDataUpdater*", "*Consolidator*", "*UsbCeip*"], "state": "Ready" }
+      ]
+    },
+    {
+      "id": "disable_edge_ads_ai",
+      "name": "Wyłącz reklamy, feed MSN i funkcje AI w Microsoft Edge",
+      "category": "Edge",
+      "description": "Blokuje reklamy, karty sponsorowane, feed informacyjny MSN oraz integrację Copilota w przeglądarce Edge.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "NewTabPageContentEnabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "NewTabPageContentEnabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "NewTabPageHideDefaultTopSites", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "EdgeShoppingAssistantEnabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "ShowRecommendationsEnabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "CopilotCDPPageContext", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "HubsSidebarEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "NewTabPageContentEnabled" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "NewTabPageHideDefaultTopSites" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "EdgeShoppingAssistantEnabled" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "ShowRecommendationsEnabled" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "CopilotCDPPageContext" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "HubsSidebarEnabled" }
+      ]
+    },
+    {
+      "id": "disable_edge_startup_boost",
+      "name": "Wyłącz działanie procesów Edge w tle po zamknięciu okna",
+      "category": "Edge",
+      "description": "Zatrzymuje Startup Boost i zapobiega pozostawaniu procesów Edge w pamięci RAM, oszczędzając baterię i zasoby.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "name": "StartupBoostEnabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "StartupBoostEnabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "BackgroundModeEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "StartupBoostEnabled" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge", "name": "BackgroundModeEnabled" }
+      ]
+    },
+    {
+      "id": "disable_gamedvr",
+      "name": "Wyłącz Game DVR i nagrywanie gier w tle",
+      "category": "GamingAndPerformance",
+      "description": "Wyłącza ukryte przechwytywanie wideo i nakładkę Game DVR, redukując opóźnienia (input lag) oraz mikroprzycięcia w grach.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Gaming"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\System\\GameConfigStore",
+        "name": "GameDVR_Enabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\System\\GameConfigStore", "name": "GameDVR_Enabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR", "name": "AppCaptureEnabled", "value": 0, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR", "name": "AllowGameDVR", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\System\\GameConfigStore", "name": "GameDVR_Enabled", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR", "name": "AppCaptureEnabled", "value": 1, "propertyType": "DWord" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR", "name": "AllowGameDVR" }
+      ]
+    },
+    {
+      "id": "disable_mouse_acceleration",
+      "name": "Wyłącz akcelerację myszy (precyzja 1:1 dla graczy)",
+      "category": "GamingAndPerformance",
+      "description": "Wyłącza tzw. 'zwiększanie precyzji wskaźnika' w Windows, zapewniając idealnie liniowe, bezpośrednie ruchy myszą w grach.",
+      "risk": "Safe",
+      "presets": ["Gaming"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Control Panel\\Mouse",
+        "name": "MouseSpeed",
+        "expected": "0"
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseSpeed", "value": "0", "propertyType": "String" },
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseThreshold1", "value": "0", "propertyType": "String" },
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseThreshold2", "value": "0", "propertyType": "String" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseSpeed", "value": "1", "propertyType": "String" },
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseThreshold1", "value": "6", "propertyType": "String" },
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Mouse", "name": "MouseThreshold2", "value": "10", "propertyType": "String" }
+      ]
+    },
+    {
+      "id": "disable_sticky_keys_prompt",
+      "name": "Wyłącz irytujące okno Klawiszy Trwałych (Sticky Keys)",
+      "category": "GamingAndPerformance",
+      "description": "Blokuje wyskakujące okno z pytaniem o włączenie klawiszy trwałych po pięciokrotnym naciśnięciu klawisza Shift.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Gaming"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Control Panel\\Accessibility\\StickyKeys",
+        "name": "Flags",
+        "expected": "506"
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Accessibility\\StickyKeys", "name": "Flags", "value": "506", "propertyType": "String" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Control Panel\\Accessibility\\StickyKeys", "name": "Flags", "value": "510", "propertyType": "String" }
+      ]
+    },
+    {
+      "id": "disable_delivery_optimization",
+      "name": "Wyłącz udostępnianie aktualizacji P2P (Delivery Optimization)",
+      "category": "GamingAndPerformance",
+      "description": "Blokuje wykorzystywanie Twojego łącza internetowego do wysyłania aktualizacji Windows innym komputerom w sieci.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Gaming"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+        "name": "DODownloadMode",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization", "name": "DODownloadMode", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization", "name": "DODownloadMode" }
+      ]
+    },
+    {
+      "id": "disable_fast_startup",
+      "name": "Wyłącz Szybkie uruchamianie (Fast Startup / Hiberboot)",
+      "category": "GamingAndPerformance",
+      "description": "Zapewnia pełne, czyste wyłączanie jądra systemu, eliminując częste błędy sterowników i problemy z niestabilnością pamięci RAM.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "name": "HiberbootEnabled",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power", "name": "HiberbootEnabled", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power", "name": "HiberbootEnabled", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_bitlocker_auto_encryption",
+      "name": "Zablokuj automatyczne szyfrowanie dysków BitLocker",
+      "category": "GamingAndPerformance",
+      "description": "Zapobiega automatycznemu szyfrowaniu nowych dysków i partycji przez Windows 11 (24H2), chroniąc przed utratą dostępu.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\BitLocker",
+        "name": "PreventDeviceEncryption",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\BitLocker", "name": "PreventDeviceEncryption", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\BitLocker", "name": "PreventDeviceEncryption" }
+      ]
+    },
+    {
+      "id": "hide_onedrive_explorer",
+      "name": "Ukryj folder OneDrive w panelu nawigacji Eksploratora",
+      "category": "OneDriveAndCloud",
+      "description": "Usuwa zbędny skrót OneDrive z lewego paska bocznego w oknach Eksploratora plików.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKCU:\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+        "name": "System.IsPinnedToNameSpaceTree",
+        "expected": 0
+      },
+      "apply": [
+        { "type": "registry", "path": "HKCU:\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "name": "System.IsPinnedToNameSpaceTree", "value": 0, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKCU:\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "name": "System.IsPinnedToNameSpaceTree", "value": 1, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "disable_onedrive_sync",
+      "name": "Wyłącz synchronizację plików usługi OneDrive (GPO)",
+      "category": "OneDriveAndCloud",
+      "description": "Blokuje synchronizowanie plików w tle z chmurą Microsoft OneDrive przez zasady grupy.",
+      "risk": "Safe",
+      "presets": [],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive",
+        "name": "DisableFileSyncNGSC",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive", "name": "DisableFileSyncNGSC", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive", "name": "DisableFileSyncNGSC" }
+      ]
+    },
+    {
+      "id": "defer_feature_updates_stable",
+      "name": "Stabilny profil Windows Update (odraczaj duże wersje o 1 rok)",
+      "category": "WindowsUpdates",
+      "description": "Instaluje natychmiast łatki bezpieczeństwa, lecz odracza duże roczne kompilacje funkcjonalne o 365 dni.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "name": "DeferFeatureUpdates",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "DeferFeatureUpdates", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "DeferFeatureUpdatesPeriodInDays", "value": 365, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "DeferFeatureUpdates" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate", "name": "DeferFeatureUpdatesPeriodInDays" }
+      ]
+    },
+    {
+      "id": "disable_reboot_with_logged_users",
+      "name": "Zablokuj wymuszony restart Windows Update przy zalogowanym użytkowniku",
+      "category": "WindowsUpdates",
+      "description": "System Windows nigdy nie zrestartuje samoczynnie komputera, gdy na nim pracujesz lub grasz.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+        "name": "NoAutoRebootWithLoggedOnUsers",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU", "name": "NoAutoRebootWithLoggedOnUsers", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU", "name": "NoAutoRebootWithLoggedOnUsers" }
+      ]
+    },
+    {
+      "id": "enable_defender_pua",
+      "name": "Włącz ochronę przed niechcianym oprogramowaniem (PUA/PUP) w Windows Defender",
+      "category": "Privacy",
+      "description": "Blokuje automatyczną instalację adware, uciążliwych pasków narzędzi (toolbars) i instalatorów śmieciowych.",
+      "risk": "Safe",
+      "presets": ["Recommended", "Privacy"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine",
+        "name": "MpEnablePus",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine", "name": "MpEnablePus", "value": 1, "propertyType": "DWord" },
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender", "name": "PUAProtection", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine", "name": "MpEnablePus" },
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender", "name": "PUAProtection" }
+      ]
+    },
+    {
+      "id": "enable_win32_long_paths",
+      "name": "Włącz obsługę długich ścieżek plików (> 260 znaków)",
+      "category": "UIAndExplorer",
+      "description": "Usuwa limit MAX_PATH (260 znaków) w systemie Windows, zapobiegając błędom przy kopiowaniu i rozpakowywaniu głęboko zagnieżdżonych folderów.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "name": "LongPathsEnabled",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem", "name": "LongPathsEnabled", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem", "name": "LongPathsEnabled", "value": 0, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "enable_detailed_bsod",
+      "name": "Włącz szczegółowe informacje o awariach na ekranie BSOD",
+      "category": "UIAndExplorer",
+      "description": "Zamiast samego kodu QR i ogólnego komunikatu wyświetla dokładną nazwę pliku sterownika (.sys) i kod błędu powodujący awarię.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "name": "DisplayParameters",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\CrashControl", "name": "DisplayParameters", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry", "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\CrashControl", "name": "DisplayParameters", "value": 0, "propertyType": "DWord" }
+      ]
+    },
+    {
+      "id": "enable_verbose_status",
+      "name": "Włącz szczegółowe komunikaty uruchamiania i zamykania (Verbose Status)",
+      "category": "UIAndExplorer",
+      "description": "Zamiast ogólnego napisu 'Czekaj...' wyświetla dokładne nazwy ładowanych usług, profilu i zamykanych procesów w tle.",
+      "risk": "Safe",
+      "presets": ["Recommended"],
+      "check": {
+        "type": "registry",
+        "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "name": "VerboseStatus",
+        "expected": 1
+      },
+      "apply": [
+        { "type": "registry", "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", "name": "VerboseStatus", "value": 1, "propertyType": "DWord" }
+      ],
+      "revert": [
+        { "type": "registry_delete", "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", "name": "VerboseStatus" }
+      ]
+    }
+  ]
+}

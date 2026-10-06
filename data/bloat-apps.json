@@ -1,0 +1,217 @@
+﻿{
+  "Version": "2.0",
+  "SafeToRemove": [
+    {
+      "name": "Clipchamp (Edytor wideo)",
+      "pattern": "*Clipchamp.Clipchamp*",
+      "description": "Chmurowy edytor wideo firmy Microsoft z płatnymi subskrypcjami."
+    },
+    {
+      "name": "Nowy Outlook dla Windows",
+      "pattern": "*Microsoft.OutlookForWindows*",
+      "description": "Nowy, powolny klient poczty oparty na WebView2, zastępujący Poczta i Kalendarz."
+    },
+    {
+      "name": "Dev Home",
+      "pattern": "*Microsoft.Windows.DevHome*",
+      "description": "Narzędzie deweloperskie instalowane domyślnie w systemie Windows 11."
+    },
+    {
+      "name": "Power Automate",
+      "pattern": "*Microsoft.PowerAutomateDesktop*",
+      "description": "Narzędzie do automatyzacji zadań pulpitu dla użytkowników korporacyjnych."
+    },
+    {
+      "name": "Centrum Opinii (Feedback Hub)",
+      "pattern": "*Microsoft.WindowsFeedbackHub*",
+      "description": "Aplikacja do zgłaszania opinii i błędów firmie Microsoft."
+    },
+    {
+      "name": "Uzyskaj pomoc (Get Help)",
+      "pattern": "*Microsoft.GetHelp*",
+      "description": "Aplikacja pomocy technicznej i automatycznych poradników online."
+    },
+    {
+      "name": "Wskazówki (Get Started / Tips)",
+      "pattern": "*Microsoft.Getstarted*",
+      "description": "Samouczek początkowy dla nowych użytkowników systemu Windows."
+    },
+    {
+      "name": "Wiadomości Bing (Microsoft News)",
+      "pattern": "*Microsoft.BingNews*",
+      "description": "Agregator wiadomości i artykułów sponsorowanych MSN."
+    },
+    {
+      "name": "Finanse Bing (Microsoft Finance)",
+      "pattern": "*Microsoft.BingFinance*",
+      "description": "Aplikacja rynków finansowych i notowań giełdowych Bing."
+    },
+    {
+      "name": "Sport Bing (Microsoft Sports)",
+      "pattern": "*Microsoft.BingSports*",
+      "description": "Wyniki meczów i wiadomości sportowe Bing."
+    },
+    {
+      "name": "Pogoda Bing (Microsoft Weather)",
+      "pattern": "*Microsoft.BingWeather*",
+      "description": "Prognoza pogody Bing powiązana z feedem informacyjnym MSN."
+    },
+    {
+      "name": "Krótki przewodnik (Quick Assist)",
+      "pattern": "*MicrosoftCorporationII.QuickAssist*",
+      "description": "Narzędzie do zdalnego udostępniania i pomocy technicznej pulpitu."
+    },
+    {
+      "name": "Filmy i TV (Zune Video)",
+      "pattern": "*Microsoft.ZuneVideo*",
+      "description": "Stara aplikacja do wypożyczania i odtwarzania wideo ze Sklepu."
+    },
+    {
+      "name": "Przeglądarka 3D (3D Viewer)",
+      "pattern": "*Microsoft.Microsoft3DViewer*",
+      "description": "Podgląd plików modeli trójwymiarowych (.obj, .fbx)."
+    },
+    {
+      "name": "3D Builder",
+      "pattern": "*Microsoft.3DBuilder*",
+      "description": "Podstawowy program do edycji obiektów trójwymiarowych i druku 3D."
+    },
+    {
+      "name": "Paint 3D & Print 3D",
+      "pattern": "*Microsoft.Print3D*",
+      "description": "Narzędzie do druku 3D."
+    },
+    {
+      "name": "Microsoft 365 (Office Hub)",
+      "pattern": "*Microsoft.MicrosoftOfficeHub*",
+      "description": "Aplikacja promująca zakup i uruchamianie subskrypcji pakietu biurowego Microsoft 365."
+    },
+    {
+      "name": "OneNote (wersja UWP)",
+      "pattern": "*Microsoft.Office.OneNote*",
+      "description": "Wersja UWP notatnika OneNote (zastępowana przez wersję klasyczną Office)."
+    },
+    {
+      "name": "Microsoft To Do",
+      "pattern": "*Microsoft.Todos*",
+      "description": "Lista zadań i przypomnień Microsoft To Do."
+    },
+    {
+      "name": "Family Safety (Bezpieczeństwo rodzinne)",
+      "pattern": "*MicrosoftCorporationII.MicrosoftFamily*",
+      "description": "Narzędzie kontroli rodzicielskiej i raportowania czasu przed ekranem."
+    },
+    {
+      "name": "Mixed Reality Portal",
+      "pattern": "*Microsoft.MixedReality.Portal*",
+      "description": "Portal dla gogli wirtualnej i mieszanej rzeczywistości (WMR)."
+    },
+    {
+      "name": "Cortana (Wycofany asystent)",
+      "pattern": "*Microsoft.549981C3F5F10*",
+      "description": "Wycofana przez firmę Microsoft aplikacja asystenta głosowego Cortana."
+    },
+    {
+      "name": "Microsoft Teams (Wersja osobista / chat)",
+      "pattern": "*MSTeams*",
+      "description": "Domyślnie instalowany komunikator Teams dla kont osobistych."
+    },
+    {
+      "name": "Microsoft Copilot (Aplikacja Store)",
+      "pattern": "*Microsoft.Copilot*|*Microsoft.Windows.Ai.Copilot.Provider*",
+      "description": "Aplikacja asystenta Copilot ze Sklepu Microsoft."
+    },
+    {
+      "name": "Mobilne Plany (OneConnect)",
+      "pattern": "*Microsoft.OneConnect*",
+      "description": "Moduł łączenia z sieciami komórkowymi eSIM dla laptopów."
+    },
+    {
+      "name": "Sponsorowane gry i social media (TikTok, Instagram, Disney itp.)",
+      "pattern": "*TikTok*|*Instagram*|*Facebook*|*Disney*|*CandyCrush*|*AmazonVideo*",
+      "description": "Aplikacje stron trzecich instalowane przez OEM lub Windows bez zgody użytkownika."
+    },
+    {
+      "name": "Spotify",
+      "pattern": "*SpotifyAB.SpotifyMusic*",
+      "description": "Aplikacja Spotify zainstalowana ze Sklepu Microsoft Store."
+    }
+  ],
+  "Optional": [
+    {
+      "name": "Łącze z telefonem (Phone Link / Your Phone)",
+      "pattern": "*Microsoft.YourPhone*",
+      "description": "Synchronizacja powiadomień, SMS i zdjęć ze smartfonem z Androidem lub iOS."
+    },
+    {
+      "name": "Xbox App & Nakładka Game Bar",
+      "pattern": "*Microsoft.XboxGamingOverlay*|*Microsoft.XboxApp*|*Microsoft.GamingApp*",
+      "description": "Aplikacja Xbox oraz nakładka gracza pod klawiszem Win+G (Game Bar)."
+    },
+    {
+      "name": "Xbox Identity Provider & Usługi sieciowe",
+      "pattern": "*Microsoft.XboxIdentityProvider*|*Microsoft.Xbox.TCUI*|*Microsoft.XboxSpeechToTextOverlay*",
+      "description": "Komponenty logowania i usług sieciowych dla gier z Xbox i Microsoft Store."
+    },
+    {
+      "name": "Pasjans (Microsoft Solitaire Collection)",
+      "pattern": "*Microsoft.MicrosoftSolitaireCollection*",
+      "description": "Kolekcja gier karcianych pasjans z reklamami."
+    },
+    {
+      "name": "Rejestrator dźwięku (Sound Recorder)",
+      "pattern": "*Microsoft.WindowsSoundRecorder*",
+      "description": "Wbudowane narzędzie do nagrywania notatek głosowych z mikrofonu."
+    },
+    {
+      "name": "Mapy Windows (Windows Maps)",
+      "pattern": "*Microsoft.WindowsMaps*",
+      "description": "Nawigacja i mapy offline firmy Microsoft."
+    },
+    {
+      "name": "Poczta i Kalendarz (Windows Mail)",
+      "pattern": "*microsoft.windowscommunicationsapps*",
+      "description": "Klasyczna, lekka aplikacja poczty i kalendarza Windows."
+    },
+    {
+      "name": "Zegar i Alarmy (Windows Alarms)",
+      "pattern": "*Microsoft.WindowsAlarms*",
+      "description": "Budzik, stoper, minutnik i zegar światowy."
+    },
+    {
+      "name": "Windows Media Player (Zune Music)",
+      "pattern": "*Microsoft.ZuneMusic*",
+      "description": "Domyślny nowoczesny odtwarzacz muzyki i wideo w systemie Windows 11."
+    },
+    {
+      "name": "Notatnik Windows (Nowa wersja ze Sklepu)",
+      "pattern": "*Microsoft.WindowsNotepad*",
+      "description": "Nowa wersja Notatnika z kartami i sprawdzaniem pisowni."
+    },
+    {
+      "name": "Kalkulator Windows",
+      "pattern": "*Microsoft.WindowsCalculator*",
+      "description": "Wbudowany kalkulator systemowy (standardowy, naukowy, programisty)."
+    },
+    {
+      "name": "Aparat Windows (Camera)",
+      "pattern": "*Microsoft.WindowsCamera*",
+      "description": "Aplikacja do obsługi kamery internetowej i robienia zdjęć."
+    },
+    {
+      "name": "Sticky Notes (Żółte karteczki)",
+      "pattern": "*Microsoft.MicrosoftStickyNotes*",
+      "description": "Aplikacja do przyklejania notatek na pulpicie."
+    },
+    {
+      "name": "Narzędzie Wycinanie (Snipping Tool)",
+      "pattern": "*Microsoft.ScreenSketch*",
+      "description": "Narzędzie do zrzutów ekranu (Win+Shift+S) i nagrywania pulpitu."
+    },
+    {
+      "name": "Widżety Windows (WebExperience / WidgetsPlatform)",
+      "pattern": "*MicrosoftWindows.Client.WebExperience*|*Microsoft.WidgetsPlatformRuntime*",
+      "description": "Pakiet odpowiedzialny za widżety wiadomości i pogody na pasku zadań."
+    }
+  ]
+}
